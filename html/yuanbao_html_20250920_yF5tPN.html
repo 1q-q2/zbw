@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式移动端页面</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-weight: 300;
+        }
+        
+        html {
+            font-family: sans-serif;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5em;
+            margin: 0;
+            background: #ee9ca7;
+            background: linear-gradient(to bottom right, #ee9ca7 0%, #ee9ca7 100%);
+            display: block;
+            overflow: auto;
+        }
+
+        /* 响应式容器 */
+        .container {
+            width: 100%;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        /* 移动端优化布局 */
+        .mobile-optimized {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 响应式盒子 */
+        .responsive-box {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 响应式文本 */
+        .responsive-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .responsive-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        /* 响应式按钮 */
+        .responsive-btn {
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 15px 20px;
+            background-color: white;
+            color: #79A8AE;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .responsive-btn:hover {
+            background-color: #f5f7f9;
+            transform: translateY(-2px);
+        }
+
+        /* 响应式气泡效果 */
+        .bg-bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-bubbles li {
+            position: absolute;
+            list-style: none;
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.15);
+            bottom: -160px;
+            animation: square 25s infinite;
+            transition-timing-function: linear;
+        }
+
+        /* 响应式动画 */
+        @keyframes square {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-1000px) rotate(600deg);
+            }
+        }
+
+        /* 响应式时间轴 */
+        .timeline {
+            width: 6px;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+            background-color: #ccc;
+            border-radius: 3px;
+        }
+
+        .timepoint {
+            width: 20px;
+            height: 20px;
+            margin-left: -7px;
+            position: absolute;
+            left: 50%;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        /* 响应式布局 */
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 媒体查询 - 移动设备 */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .responsive-title {
+                font-size: 1.5rem;
+            }
+            
+            .responsive-text {
+                font-size: 1rem;
+            }
+            
+            .responsive-box {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .bg-bubbles li {
+                width: 30px;
+                height: 30px;
+            }
+            
+            /* 调整动画速度 */
+            @keyframes square {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                }
+                100% {
+                    transform: translateY(-800px) rotate(600deg);
+                }
+            }
+        }
+
+        /* 媒体查询 - 小屏幕移动设备 */
+        @media screen and (max-width: 480px) {
+            .responsive-title {
+                font-size: 1.3rem;
+            }
+            
+            .responsive-btn {
+                width: 90%;
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+            
+            .bg-bubbles li {
+                width: 25px;
+                height: 25px;
+            }
+            
+            .timeline {
+                width: 4px;
+            }
+            
+            .timepoint {
+                width: 16px;
+                height: 16px;
+                margin-left: -6px;
+            }
+        }
+
+        /* 防止横屏时布局错乱 */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .responsive-box {
+                padding: 10px;
+                margin: 10px auto;
+            }
+            
+            .responsive-title {
+                margin: 10px 0;
+            }
+            
+            .responsive-btn {
+                margin: 10px auto;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <div class="container">
+        <div class="mobile-optimized">
+            <h1 class="responsive-title">移动端优化页面</h1>
+            
+            <div class="responsive-box">
+                <p class="responsive-text">这是一个响应式设计的页面，针对移动设备进行了优化，整合了您提供的CSS样式。</p>
+                <p class="responsive-text">页面会根据设备屏幕尺寸自动调整布局和元素大小。</p>
+            </div>
+            
+            <div class="responsive-box">
+                <h2 class="responsive-title">特性介绍</h2>
+                <p class="responsive-text">1. 响应式布局 - 适应各种屏幕尺寸</p>
+                <p class="responsive-text">2. 移动端触摸友好 - 按钮和链接易于点击</p>
+                <p class="responsive-text">3. 性能优化 - 动画流畅不卡顿</p>
+            </div>
+            
+            <div class="flex-container">
+                <a href="#" class="responsive-btn">主要按钮</a>
+                <a href="#" class="responsive-btn">次要按钮</a>
+            </div>
+            
+            <div class="responsive-box">
+                <div class="timeline">
+                    <div class="timepoint" style="top: 20%;"></div>
+                    <div class="timepoint" style="top: 50%;"></div>
+                    <div class="timepoint" style="top: 80%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 动态调整气泡数量基于屏幕尺寸
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgBubbles = document.querySelector('.bg-bubbles');
+            const screenWidth = window.innerWidth;
+            let bubbleCount = 10; // 默认数量
+            
+            if (screenWidth < 768) {
+                bubbleCount = 8;
+            }
+            if (screenWidth < 480) {
+                bubbleCount = 6;
+            }
+            
+            // 清空现有气泡
+            bgBubbles.innerHTML = '';
+            
+            // 添加新气泡
+            for (let i = 0; i < bubbleCount; i++) {
+                const li = document.createElement('li');
+                
+                // 随机位置
+                li.style.left = Math.random() * 100 + '%';
+                
+                // 随机大小
+                const size = 20 + Math.random() * 30;
+                li.style.width = size + 'px';
+                li.style.height = size + 'px';
+                
+                // 随机动画延迟和持续时间
+                li.style.animationDelay = Math.random() * 5 + 's';
+                li.style.animationDuration = (15 + Math.random() * 15) + 's';
+                
+                bgBubbles.appendChild(li);
+            }
+        });
+        
+        // 处理窗口大小变化
+        window.addEventListener('resize', function() {
+            const screenWidth = window.innerWidth;
+            const bubbles = document.querySelectorAll('.bg-bubbles li');
+            
+            bubbles.forEach(bubble => {
+                if (screenWidth < 480) {
+                    bubble.style.width = '20px';
+                    bubble.style.height = '20px';
+                } else {
+                    const size = 20 + Math.random() * 30;
+                    bubble.style.width = size + 'px';
+                    bubble.style.height = size + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
